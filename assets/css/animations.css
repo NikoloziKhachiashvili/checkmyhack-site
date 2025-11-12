@@ -1,0 +1,304 @@
+/*
+  Micro-interactions and Scroll Animations
+  Low-overhead CSS animations with reduced-motion support
+*/
+
+/*---------------------------------------
+  SCROLL ANIMATIONS
+-----------------------------------------*/
+
+/* Base animation states - hidden by default */
+.animate-on-scroll {
+  opacity: 0;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Fade in from bottom */
+.animate-fade-up {
+  transform: translateY(30px);
+}
+
+/* Fade in from left */
+.animate-fade-left {
+  transform: translateX(-30px);
+}
+
+/* Fade in from right */
+.animate-fade-right {
+  transform: translateX(30px);
+}
+
+/* Fade in (no transform) */
+.animate-fade {
+  transform: none;
+}
+
+/* Scale in */
+.animate-scale {
+  transform: scale(0.95);
+}
+
+/* Visible state - triggered by JavaScript */
+.animate-on-scroll.animate-visible {
+  opacity: 1;
+  transform: translateY(0) translateX(0) scale(1);
+}
+
+/* Staggered delays for child elements */
+.animate-stagger > *:nth-child(1) { transition-delay: 0.1s; }
+.animate-stagger > *:nth-child(2) { transition-delay: 0.2s; }
+.animate-stagger > *:nth-child(3) { transition-delay: 0.3s; }
+.animate-stagger > *:nth-child(4) { transition-delay: 0.4s; }
+.animate-stagger > *:nth-child(5) { transition-delay: 0.5s; }
+.animate-stagger > *:nth-child(6) { transition-delay: 0.6s; }
+.animate-stagger > *:nth-child(7) { transition-delay: 0.7s; }
+.animate-stagger > *:nth-child(8) { transition-delay: 0.8s; }
+.animate-stagger > *:nth-child(n+9) { transition-delay: 0.9s; }
+
+/*---------------------------------------
+  HOVER EFFECTS - BUTTONS
+-----------------------------------------*/
+
+.custom-btn {
+  position: relative;
+  overflow: hidden;
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(93, 209, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.custom-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.custom-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(93, 209, 255, 0.4);
+}
+
+.custom-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.custom-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(93, 209, 255, 0.3);
+}
+
+/* Border button hover effect */
+.custom-border-btn {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.custom-border-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--custom-btn-bg-color);
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.custom-border-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(93, 209, 255, 0.3);
+  color: var(--text-on-accent);
+}
+
+.custom-border-btn:hover::before {
+  left: 0;
+}
+
+/*---------------------------------------
+  HOVER EFFECTS - CARDS
+-----------------------------------------*/
+
+.custom-block {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(0);
+}
+
+.custom-block:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(93, 209, 255, 0.15);
+  border-color: rgba(93, 209, 255, 0.3);
+}
+
+/* Balance card special hover */
+.custom-block-balance:hover {
+  box-shadow: 0 12px 32px rgba(107, 255, 184, 0.2);
+}
+
+/* Exchange rate items */
+.custom-block-exchange .d-flex {
+  transition: all 0.3s ease;
+  border-radius: var(--border-radius-small);
+  padding: 12px;
+  margin: -12px;
+}
+
+.custom-block-exchange .d-flex:hover {
+  background: rgba(93, 209, 255, 0.05);
+  transform: translateX(4px);
+}
+
+/* Profile cards */
+.custom-block-profile {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.custom-block-profile:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 16px 40px rgba(93, 209, 255, 0.2);
+}
+
+/*---------------------------------------
+  HOVER EFFECTS - NAVIGATION
+-----------------------------------------*/
+
+#sidebarMenu .nav-link {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+#sidebarMenu .nav-link::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--primary-color);
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
+}
+
+#sidebarMenu .nav-link:hover::before,
+#sidebarMenu .nav-link.active::before {
+  transform: scaleY(1);
+}
+
+#sidebarMenu .nav-link:hover {
+  transform: translateX(4px);
+  color: var(--primary-color);
+}
+
+/*---------------------------------------
+  HOVER EFFECTS - DROPDOWN ITEMS
+-----------------------------------------*/
+
+.dropdown-item {
+  transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+  transform: scale(1.05);
+  background: rgba(93, 209, 255, 0.1);
+}
+
+/*---------------------------------------
+  HOVER EFFECTS - IMAGES
+-----------------------------------------*/
+
+.profile-image,
+.exchange-image {
+  transition: all 0.3s ease;
+}
+
+.profile-image:hover,
+.exchange-image:hover {
+  transform: scale(1.1);
+}
+
+/*---------------------------------------
+  STICKY HEADER ANIMATIONS
+-----------------------------------------*/
+
+/* Ensure navbar transitions are smooth */
+.navbar {
+  will-change: padding, background, backdrop-filter;
+}
+
+/*---------------------------------------
+  REDUCED MOTION SUPPORT
+-----------------------------------------*/
+
+@media (prefers-reduced-motion: reduce) {
+  /* Disable all animations and transitions */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Keep elements visible */
+  .animate-on-scroll {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Disable hover transforms */
+  .custom-btn:hover,
+  .custom-border-btn:hover,
+  .custom-block:hover,
+  .custom-block-profile:hover,
+  .custom-block-exchange .d-flex:hover,
+  #sidebarMenu .nav-link:hover,
+  .dropdown-item:hover,
+  .profile-image:hover,
+  .exchange-image:hover {
+    transform: none;
+  }
+
+  /* Disable navbar transitions */
+  .navbar,
+  .navbar.navbar-collapsed {
+    transition: none;
+  }
+
+  /* Keep color changes but remove transforms */
+  .custom-btn:hover {
+    box-shadow: 0 2px 8px rgba(93, 209, 255, 0.2);
+  }
+
+  .custom-block:hover {
+    box-shadow: 0 4px 12px rgba(93, 209, 255, 0.1);
+  }
+}
+
+/*---------------------------------------
+  PERFORMANCE OPTIMIZATIONS
+-----------------------------------------*/
+
+.animate-on-scroll,
+.custom-btn,
+.custom-block,
+.custom-block-profile,
+#sidebarMenu .nav-link {
+  will-change: transform, opacity;
+}
+
+/* Remove will-change after animation completes */
+.animate-on-scroll.animate-visible {
+  will-change: auto;
+}
+
